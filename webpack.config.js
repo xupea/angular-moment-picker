@@ -21,24 +21,24 @@ pkg.version = increase ? semver.inc(pkg.version, increase) : pkg.version;
 
 // themes - read file from `src/themes` folder
 let themes = [];
-fs.readdirSync('src/themes').forEach(file => themes.push(file.replace('.less', '')));
+fs.readdirSync('src/themes').forEach(file => themes.push(file.replace('.scss', '')));
 
 // extract plugin settings for css file generation
 let extractBaseTheme = new extractTextPlugin(filename + '.css');
 let extractOtherThemes = themes.map(theme => ({
-	file: path.resolve(__dirname, 'src/themes/' + theme + '.less'),
+	file: path.resolve(__dirname, 'src/themes/' + theme + '.scss'),
 	extract: new extractTextPlugin('themes/' + theme + filesuffix + '.css')
 }));
 let extractPluginLoaders = [
 	'css-loader',
 	{ loader: 'postcss-loader', options: { plugins: [ autoprefixer({ browsers: ['> 0%'] }) ] } },
-	'less-loader'
+	'sass-loader'
 ];
 
 module.exports = {
 	entry: [
 		'./src/index.ts',
-		'./src/index.less',
+		'./src/index.scss',
 		...extractOtherThemes.map(theme => theme.file)
 	],
 	output: {
@@ -48,13 +48,13 @@ module.exports = {
 	bail: true,
 	externals: Object.keys(pkg.dependencies),
 	resolve: {
-		extensions: ['.ts', '.html', '.less']
+		extensions: ['.ts', '.html', '.scss']
 	},
 	module: {
 		rules: [
 			{ test: /\.ts$/, use: ['ts-loader', 'tslint-loader'] },
 			{ test: /\.html$/, use: 'html-loader?minimize=true' },
-			{ test: /\.less$/, exclude: /themes/, use: extractBaseTheme.extract(extractPluginLoaders) },
+			{ test: /\.scss$/, exclude: /themes/, use: extractBaseTheme.extract(extractPluginLoaders) },
 			...extractOtherThemes.map(theme => {
 				return { include: theme.file, use: theme.extract.extract(extractPluginLoaders) };
 			})

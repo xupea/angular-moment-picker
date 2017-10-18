@@ -154,15 +154,18 @@ export default class Directive implements ng.IDirective {
 				update: () => { $scope.view.value = momentToValue($scope.view.moment, $scope.format); },
 				toggle: () => { $scope.view.isOpen ? $scope.view.close() : $scope.view.open(); },
 				open: () => {
-					if ($scope.disabled || $scope.view.isOpen || $scope.inline) return;
+					// if ($scope.disabled || $scope.view.isOpen || $scope.inline) return;
+
+					$element.after($scope.picker);
+					$scope.picker.addClass('inline');
 
 					$scope.isOpen = true;
 					$scope.view.isOpen = true;
-					document.body.appendChild($scope.picker[0]);
+					// document.body.appendChild($scope.picker[0]);
 					$scope.view.position();
 				},
 				close: () => {
-					if (!$scope.view.isOpen || $scope.inline) return;
+					// if (!$scope.view.isOpen || $scope.inline) return;
 
 					$scope.isOpen = false;
 					$scope.view.isOpen = false;
@@ -302,11 +305,18 @@ export default class Directive implements ng.IDirective {
 				: angular.element($element[0]);
 			$scope.input.addClass('moment-picker-input').attr('tabindex', 0);
 			($scope.position || '').split(' ').forEach((className: string) => $scope.picker.addClass(className));
-			if (!$scope.inline) $scope.picker[0].parentNode.removeChild($scope.picker[0]);
-			else {
-				$element.after($scope.picker);
-				$scope.picker.addClass('inline');
-			}
+
+			$scope.picker[0].parentNode.removeChild($scope.picker[0]);
+			// else {
+				// $element.after($scope.picker);
+				// $scope.picker.addClass('inline');
+			// }
+
+			// if (!$scope.inline) $scope.picker[0].parentNode.removeChild($scope.picker[0]);
+			// else {
+			// 	$element.after($scope.picker);
+			// 	$scope.picker.addClass('inline');
+			// }
 
 			// transclude scope to template additions
 			this.$timeout(() => {

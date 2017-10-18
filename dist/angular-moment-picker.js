@@ -367,16 +367,16 @@ var Directive = /** @class */ (function () {
                     update: function () { $scope.view.value = utility_1.momentToValue($scope.view.moment, $scope.format); },
                     toggle: function () { $scope.view.isOpen ? $scope.view.close() : $scope.view.open(); },
                     open: function () {
-                        if ($scope.disabled || $scope.view.isOpen || $scope.inline)
-                            return;
+                        // if ($scope.disabled || $scope.view.isOpen || $scope.inline) return;
+                        $element.after($scope.picker);
+                        $scope.picker.addClass('inline');
                         $scope.isOpen = true;
                         $scope.view.isOpen = true;
-                        document.body.appendChild($scope.picker[0]);
+                        // document.body.appendChild($scope.picker[0]);
                         $scope.view.position();
                     },
                     close: function () {
-                        if (!$scope.view.isOpen || $scope.inline)
-                            return;
+                        // if (!$scope.view.isOpen || $scope.inline) return;
                         $scope.isOpen = false;
                         $scope.view.isOpen = false;
                         $scope.view.selected = $scope.startView;
@@ -504,12 +504,16 @@ var Directive = /** @class */ (function () {
                     : angular.element($element[0]);
                 $scope.input.addClass('moment-picker-input').attr('tabindex', 0);
                 ($scope.position || '').split(' ').forEach(function (className) { return $scope.picker.addClass(className); });
-                if (!$scope.inline)
-                    $scope.picker[0].parentNode.removeChild($scope.picker[0]);
-                else {
-                    $element.after($scope.picker);
-                    $scope.picker.addClass('inline');
-                }
+                $scope.picker[0].parentNode.removeChild($scope.picker[0]);
+                // else {
+                // $element.after($scope.picker);
+                // $scope.picker.addClass('inline');
+                // }
+                // if (!$scope.inline) $scope.picker[0].parentNode.removeChild($scope.picker[0]);
+                // else {
+                // 	$element.after($scope.picker);
+                // 	$scope.picker.addClass('inline');
+                // }
                 // transclude scope to template additions
                 _this.$timeout(function () {
                     angular.forEach($scope.additions || {}, function (tempalteUrl, key) {

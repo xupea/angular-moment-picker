@@ -2,18 +2,29 @@
   <head>
     <meta charset="utf-8">
     <script src="../node_modules/angular/angular.js"></script>
-    <script src="../dist/moment-with-locales.js"></script>
+    <script src="./moment-with-locales.js"></script>
     <script src="../dist/angular-moment-picker.js"></script>
     <script src="./app.js"></script>
     <link rel="stylesheet" href="../dist/angular-moment-picker.css">
+    <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
-      <input class="form-control"
-        ng-model="ctrl.input"
-        ng-model-options="{ updateOn: 'blur' }"
-        placeholder="Select a date..."
-        min-view="year"
-        max-view="year"
-        moment-picker="ctrl.input">
+    <div>
+        <div class="container" style="width: 100%; position:relative;">
+            <div class="dropdown5-parent dropdown-text" min-view="year"
+                inline="false"
+                max-view="year"
+                moment-picker="ctrl.input" format="MMM YYYY">
+                <div id="dropdown3" class="dropdown-toggle schroders-container" role="button" data-toggle="dropdown" data-target=".dropdown5-parent">
+                    <div class="month-calendar-icon">
+                    </div>
+                    <div class="month-calendar-text">Select Month {{ ctrl.input }}</div>
+                    <div class="select-icon-inner">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>The dropdown will overlap</div>
+    </div>
   </body>
 </html>
