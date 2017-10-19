@@ -9,16 +9,17 @@ $today-fg-shadow:           fade(#fff, 90%);
 $today-bg:                  #e4eef5;
 
 $hover-bg-color:            #fafbfb;
-$hover-bg-image:            linear-gradient(#f0f3f4, $hover-bg-color);
+// $hover-bg-image:            linear-gradient(#f0f3f4, $hover-bg-color);
 $disabled-fg:               #abbbc7;
 
 $highlighted-bg-image:      radial-gradient(transparent, fade(#000, 15%));
 
 $selected-fg:               #fff;
 $selected-fg-shadow:        0 -1px 0 fade(#000, 30%);
-$selected-bg-color:         #45b1e8;
-$selected-bg-image:         linear-gradient(#45b1e8, #3097de);
+$selected-bg-color:         #2d55b2;
+// $selected-bg-image:         linear-gradient(#45b1e8, #3097de);
 $selected-border-color:     #3ca0dd;
+$selected-border-radius:    10px;
 
 .moment-picker-input { cursor: pointer; }
 .moment-picker {
@@ -86,13 +87,21 @@ $selected-border-color:     #3ca0dd;
         text-shadow: 0 1px 0 $text-shadow;
         cursor: pointer;
         border-radius: 4px;
-        &:hover { background-color: $hover-bg-color; background-image: $hover-bg-image; }
-        &.disabled, &.disabled:hover { color: $disabled-fg; background: none; cursor: default; }
+        
     }
     td {
         &.today { background: $today-bg; color: $today-fg; text-shadow: 0 1px 0 $today-fg-shadow; }
-        &.selected { color: $selected-fg; text-shadow: $selected-fg-shadow; border-color: $selected-border-color; background-color: $selected-bg-color; background-image: $selected-bg-image; }
+        
         &.highlighted { background-image: $highlighted-bg-image; }
+
+        div {
+            height: 29px;
+            line-height: 29px;
+            border-radius: $selected-border-radius;
+            &:hover { background-color: $hover-bg-color; }
+            &.disabled, &.disabled:hover { color: $disabled-fg; background: none; cursor: default; }
+            &.selected { color: $selected-fg; text-shadow: $selected-fg-shadow; border-color: $selected-border-color; background-color: $selected-bg-color; }
+        }
     }
 
     // decade view, year view

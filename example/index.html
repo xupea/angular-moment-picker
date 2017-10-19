@@ -8,17 +8,22 @@
     <link rel="stylesheet" href="../dist/angular-moment-picker.css">
     <link rel="stylesheet" href="./css/style.css">
   </head>
-  <body>
+  <body ng-controller="demoController as ctrl">
     <div>
         <div class="container" style="width: 100%; position:relative;">
-            <div class="dropdown5-parent dropdown-text" min-view="year"
-                inline="false"
+            <div class="dropdown5-parent dropdown-text" 
+                min-view="decade"
+                inline="true"
                 max-view="year"
+                today="true"
+                validate="true"
+                max-date="ctrl.maxDateString"
+                min-date="ctrl.minDateString"
                 moment-picker="ctrl.input" format="MMM YYYY">
                 <div id="dropdown3" class="dropdown-toggle schroders-container" role="button" data-toggle="dropdown" data-target=".dropdown5-parent">
                     <div class="month-calendar-icon">
                     </div>
-                    <div class="month-calendar-text">Select Month {{ ctrl.input }}</div>
+                    <div class="month-calendar-text">{{ ctrl.input }}</div>
                     <div class="select-icon-inner">
                     </div>
                 </div>
